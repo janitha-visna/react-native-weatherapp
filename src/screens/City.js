@@ -8,26 +8,51 @@ import {
   View,
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
+import IconText from "../components/IconText";
 
 const City = () => {
+  const {
+    container,
+    cityName,
+    cityText,
+    countryName,
+    populationWrapper,
+    populationText,
+    riseSetWrapper,
+    riseSetText,
+    rowLayout,
+    imageLayout,
+  } = styles;
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={container}>
       <ImageBackground
         source={require("../../assets/city.jpeg")}
-        style={styles.imageLayout}
+        style={imageLayout}
       >
         <View style={styles.overlay}>
-          <Text style={[styles.cityName, styles.cityText]}>london</Text>
-          <Text style={[styles.countryName, styles.cityText]}>uk</Text>
-          <View style={styles.populationWrapper}>
-            <Feather name={"user"} size={50} color={"red"} />
-            <Text style={styles.populationText}>8000</Text>
+          <Text style={[cityName, cityText]}>london</Text>
+          <Text style={[countryName, cityText]}>uk</Text>
+          <View style={[populationWrapper, rowLayout]}>
+            <IconText
+              iconName={"user"}
+              iconColor={"red"}
+              bodyText={"8000"}
+              bodyTextStyles={populationText}
+            />
           </View>
-          <View style={styles.riseSetWrapper}>
-            <Feather name="sunrise" size={50} color="black" />
-            <Text style={styles.riseSetText}>10:46:58am</Text>
-            <Feather name="sunset" size={50} color="black" />
-            <Text style={styles.riseSetText}>17:28:15pm</Text>
+          <View style={[riseSetWrapper, rowLayout]}>
+            <IconText
+              iconName={"sunrise"}
+              iconColor={"black"}
+              bodyText={"10:46:58am"}
+              bodyTextStyles={riseSetText}
+            />
+            <IconText
+              iconName={"sunset"}
+              iconColor={"black"}
+              bodyText={"10:46:58am"}
+              bodyTextStyles={riseSetText}
+            />
           </View>
         </View>
       </ImageBackground>
@@ -58,9 +83,6 @@ const styles = StyleSheet.create({
     color: "black",
   },
   populationWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    alignItems: "center",
     justifyContent: "center",
     marginTop: 30,
   },
@@ -71,15 +93,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
   riseSetWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
     justifyContent: "space-around",
     margin: 30,
   },
   riseSetText: {
     fontSize: 20,
     color: "black",
-    fontWeight: "bold",
+  },
+  rowLayout: {
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
 export default City;
