@@ -17,7 +17,6 @@ const Tabs = () => {
         tabBarInactiveTintColor: "grey",
         tabBarStyle: {
           backgroundColor: "lightblue",
-          
         },
         headerStyle: {
           backgroundColor: "lightblue",
