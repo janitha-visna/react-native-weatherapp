@@ -1,6 +1,6 @@
 import React from "react";
 
-import CurrentWeather from  "../screens/CurrentWeather";
+import CurrentWeather from "../screens/CurrentWeather";
 import UpcomingWeather from "../screens/UpcomingWeather";
 import City from "../screens/City";
 import { NavigationContainer } from "@react-navigation/native";
@@ -15,6 +15,18 @@ const Tabs = () => {
       screenOptions={{
         tabBarActiveTintColor: "tomato",
         tabBarInactiveTintColor: "grey",
+        tabBarStyle: {
+          backgroundColor: "lightblue",
+          
+        },
+        headerStyle: {
+          backgroundColor: "lightblue",
+        },
+        headerTitleStyle: {
+          fontWeight: "bold",
+          fontSize: 25,
+          color: "tomato",
+        },
       }}
     >
       <Tab.Screen
