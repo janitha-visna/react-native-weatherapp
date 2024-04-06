@@ -6,58 +6,14 @@ import City from "./src/screens/City";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Feather } from "@expo/vector-icons";
+import Tabs from "./src/components/Tabs";
 
-const Tab = createBottomTabNavigator();
+
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={{
-          tabBarActiveTintColor: "tomato",
-          tabBarInactiveTintColor: "grey",
-        }}
-      >
-        <Tab.Screen
-          name={"Current"}
-          component={CurrentWeather}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name={"droplet"}
-                size={25}
-                color={focused ? "tomato" : "black"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={"upcoming weather"}
-          component={UpcomingWeather}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name={"clock"}
-                size={25}
-                color={focused ? "tomato" : "black"}
-              />
-            ),
-          }}
-        />
-        <Tab.Screen
-          name={"city"}
-          component={City}
-          options={{
-            tabBarIcon: ({ focused }) => (
-              <Feather
-                name={"home"}
-                size={25}
-                color={focused ? "tomato" : "black"}
-              />
-            ),
-          }}
-        />
-      </Tab.Navigator>
+      <Tabs/>
     </NavigationContainer>
   );
 };
