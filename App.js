@@ -11,6 +11,15 @@ const App = () => {
   const [loading,error,weather] = useGetWeather()
   console.log(loading,error,weather)
 
+  if (weather && weather.list){
+    return (
+      <NavigationContainer>
+        <Tabs weather={weather} />
+      </NavigationContainer>
+    );
+
+  }
+
   // console.log("Latitude:", lat); // Log latitude
   // console.log("Longitude:", lon); // Log longitude
 
@@ -18,17 +27,7 @@ const App = () => {
   //   console.log(weather);
   // }
 
-  return (
-    <NavigationContainer>
-      {loading ? (
-        <View style={styles.container}>
-          <ActivityIndicator />
-        </View>
-      ) : (
-        <Tabs />
-      )}
-    </NavigationContainer>
-  );
+  
 };
 
 const styles = StyleSheet.create({

@@ -4,11 +4,11 @@ import { Feather } from "@expo/vector-icons";
 import RowText from "../components/RowText";
 import { weatherType } from "../utilities/weatherType";
 
-const CurrentWeather = () => {
+const CurrentWeather = ({ weatherData }) => {
   const {
     wrapper,
     container,
-    temp,
+    tempStyles,
     feels,
     highLow,
     highLowWrapper,
@@ -16,16 +16,34 @@ const CurrentWeather = () => {
     description,
     message,
   } = styles;
+
+  const {
+    main: { temp, feels_like, temp_max, temp_min },
+    weather,
+  } = weatherData;
+  //console.log(weatherData);
+
+  const weatherCondition = weather[0].main;
+
   return (
-    <SafeAreaView style={wrapper}>
+    <SafeAreaView
+      style={[
+        wrapper,
+        { backgroundColor: weatherType[weatherCondition].backgroundColor },
+      ]}
+    >
       <View style={container}>
-        <Feather name="sun" size={100} color="black" />
+        <Feather
+          name={weatherType[weatherCondition].icon}
+          size={100}
+          color="white"
+        />
         <Text>Current weather</Text>
-        <Text style={temp}>6</Text>
-        <Text style={feels}>FEELS like 5</Text>
+        <Text style={tempStyles}>{temp}</Text>
+        <Text style={feels}>{`feels like ${feels_like}`}</Text>
         <RowText
-          messageOne={"high:8"}
-          messageTwo={"low:6"}
+          messageOne={`high: ${temp_max}`}
+          messageTwo={`low: ${temp_min}`}
           containerStyles={highLowWrapper}
           messageOneStyle={highLow}
           messageTwoStyle={highLow}
@@ -33,8 +51,8 @@ const CurrentWeather = () => {
       </View>
 
       <RowText
-        messageOne={"its sunny"}
-        messageTwo={weatherType['Thunderstorm'].message}
+        messageOne={weather[0].description}
+        messageTwo={weatherType[weatherCondition].message}
         containerStyles={styles.bodyWrapper}
         messageOneStyle={styles.description}
         messageTwoStyle={styles.message}
@@ -51,10 +69,10 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     flex: 1,
-    
+
     backgroundColor: "pink",
   },
-  temp: {
+  tempStyles: {
     color: "black",
     fontSize: 48,
   },
