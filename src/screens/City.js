@@ -9,8 +9,9 @@ import {
 } from "react-native";
 import { Feather } from "@expo/vector-icons";
 import IconText from "../components/IconText";
+import moment from "moment";
 
-const City = () => {
+const City = ({ weatherData }) => {
   const {
     container,
     cityName,
@@ -23,6 +24,13 @@ const City = () => {
     rowLayout,
     imageLayout,
   } = styles;
+
+  //const {  country, population, sunrise, sunset } = weatherData;
+    const name = weatherData?.name ?? "Unknown City";
+    const country = weatherData?.country ?? "Unknown Country";
+    const population = weatherData?.population ?? "Unknown Population";
+    const sunrise = weatherData?.sunrise ?? "Unknown Sunrise";
+    const sunset = weatherData?.sunset ?? "Unknown Sunset";
   return (
     <SafeAreaView style={container}>
       <ImageBackground
@@ -30,13 +38,13 @@ const City = () => {
         style={imageLayout}
       >
         <View style={styles.overlay}>
-          <Text style={[cityName, cityText]}>london</Text>
-          <Text style={[countryName, cityText]}>uk</Text>
+          <Text style={[cityName, cityText]}>{name}</Text>
+          <Text style={[countryName, cityText]}>{country}</Text>
           <View style={[populationWrapper, rowLayout]}>
             <IconText
               iconName={"user"}
               iconColor={"red"}
-              bodyText={"8000"}
+              bodyText={`populaation: ${population}`}
               bodyTextStyles={populationText}
             />
           </View>
@@ -44,13 +52,13 @@ const City = () => {
             <IconText
               iconName={"sunrise"}
               iconColor={"black"}
-              bodyText={"10:46:58am"}
+              bodyText={moment(sunrise).format('h:mm:ss a')}
               bodyTextStyles={riseSetText}
             />
             <IconText
               iconName={"sunset"}
               iconColor={"black"}
-              bodyText={"10:46:58am"}
+              bodyText={moment(sunset).format('h:mm:ss a')}
               bodyTextStyles={riseSetText}
             />
           </View>
@@ -63,8 +71,6 @@ const City = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-
-    
   },
   imageLayout: {
     flex: 1,
